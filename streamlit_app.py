@@ -20,9 +20,10 @@ if ticker:
   df = pd.read_csv(url)
   
   price = df[['Date','Close']]
+  st.dataframe(price)
   price.dtypes()
-  price['Date'] = price['Date'].astype('datetime64[ns]')
+  price['Date'] = pd.to_datetime(price['Date'], format='%y-%m-%d')
   price = price.set_index('Date')
  
-  st.dataframe(price)
+  
   st.line_chart(price)
