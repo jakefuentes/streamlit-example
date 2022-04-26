@@ -13,5 +13,15 @@ clicked = st.button("Get Prices")
 base_url = "https://query1.finance.yahoo.com/v7/finance/download/"
 url_args= "?period1=1619473704&period2=1651009704&interval=1d&events=history&includeAdjustedClose=true"
 
+
+
 url = base_url + ticker + url_args
-st.write(url)
+
+df = pd.read_csv(url)
+st.dataframe(df)
+price = df['Date','Close']
+
+
+st.line_chart(price)
+
+
