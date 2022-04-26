@@ -21,10 +21,10 @@ if ticker:
     df = pd.read_csv(url)
   except:
     st.error("No data from that ticker. Try again, Jon!")
+    st.stop()
   if df.empty:
     st.error("No data from that ticker. Try again, Jon!")
   else:
-    
     price = df[['Date','Close']]
     price['Date'] = price['Date'].astype('datetime64[D]')
     price = price.set_index('Date')
