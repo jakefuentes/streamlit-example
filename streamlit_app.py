@@ -29,6 +29,7 @@ if ticker:
     price['Date'] = price['Date'].astype('datetime64[D]')
     price = price.set_index('Date')
     last_close = price.iloc[0,0]
+    st.metric("Last Close Price", last_close)
     
     st.line_chart(price)
 else:
