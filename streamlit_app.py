@@ -21,8 +21,8 @@ if ticker:
   
   price = df[['Date','Close']]
   st.dataframe(price)
-  price.dtypes()
-  price['Date'] = pd.to_datetime(price['Date'], format='%y-%m-%d')
+  price.dtypes
+  price['Date'] = pd.to_datetime(price['Date'], format='%Y-%m-%d')
   price = price.set_index('Date')
  
   
