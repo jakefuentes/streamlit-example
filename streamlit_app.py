@@ -16,8 +16,11 @@ if ticker:
   base_url = "https://query1.finance.yahoo.com/v7/finance/download/"
   url_args= "?period1=1619473704&period2=1651009704&interval=1d&events=history&includeAdjustedClose=true"
   url = base_url + ticker + url_args
-
-  df = pd.read_csv(url)
+  
+  try:
+    df = pd.read_csv(url)
+  except:
+    st.error("No data from that ticker. Try again, Jon!")
   if df.empty:
     st.error("No data from that ticker. Try again, Jon!")
   else:
@@ -28,3 +31,5 @@ if ticker:
     last_close = price.iloc[0,0]
     
     st.line_chart(price)
+else:
+  st.error("Needs a ticker, Jon!")
