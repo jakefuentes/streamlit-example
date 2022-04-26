@@ -18,10 +18,13 @@ if ticker:
   url = base_url + ticker + url_args
 
   df = pd.read_csv(url)
-  
-  price = df[['Date','Close']]
-  price['Date'] = price['Date'].astype('datetime64[D]')
-  price = price.set_index('Date')
- 
-  
-  st.line_chart(price)
+  if df: 
+    
+    price = df[['Date','Close']]
+    price['Date'] = price['Date'].astype('datetime64[D]')
+    price = price.set_index('Date')
+    last_close = price.iloc[0,0]
+    
+    st.line_chart(price)
+  else:
+    st.error("No data from that ticker. Try again, Jon!")
