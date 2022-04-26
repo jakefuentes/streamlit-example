@@ -10,18 +10,16 @@ ticker = st.text_input("Enter ticker symbol")
 
 clicked = st.button("Get Prices")
 
-base_url = "https://query1.finance.yahoo.com/v7/finance/download/"
-url_args= "?period1=1619473704&period2=1651009704&interval=1d&events=history&includeAdjustedClose=true"
+if ticker:
 
+  base_url = "https://query1.finance.yahoo.com/v7/finance/download/"
+  url_args= "?period1=1619473704&period2=1651009704&interval=1d&events=history&includeAdjustedClose=true"
+  url = base_url + ticker + url_args
 
+  df = pd.read_csv(url)
+  st.dataframe(df)
+  price = df['Date','Close']
+  price['Date'] = pd.to_datetime(price['Date'], errors='coerce')
+  price = price.set_index('Date')
 
-url = base_url + ticker + url_args
-
-df = pd.read_csv(url)
-st.dataframe(df)
-price = df['Date','Close']
-
-
-st.line_chart(price)
-
-
+  st.line_chart(price)
