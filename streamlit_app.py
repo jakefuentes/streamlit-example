@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 
 st.title("Playing around - stock prices")
+"Retrieves recent stock prices from Yahoo Finance"
 
 ticker = st.text_input("Enter ticker symbol")
 
@@ -17,9 +18,10 @@ if ticker:
   url = base_url + ticker + url_args
 
   df = pd.read_csv(url)
-  st.dataframe(df)
+  
   price = df['Date','Close']
   price['Date'] = pd.to_datetime(price['Date'], errors='coerce')
   price = price.set_index('Date')
-
+  price.dtypes()
+  st.dataframe(price)
   st.line_chart(price)
